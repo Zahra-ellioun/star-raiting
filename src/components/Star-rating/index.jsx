@@ -34,30 +34,48 @@ const StarRating = () => {
   return (
     <div className="flex  justify-center my-5 text-3xl">
       {starArray &&
-        starArray.map((star) =>
+        starArray.map(
+          (star) => {
+            // راه حل کوتاه شده پایین
+            // اگر هاور فعال بود الویت اون باشه در غیر این صورت بر اساس ریتنگ داده شده باشه
+
+            const isActive = star <= (hovering || rating);
+            console.log(isActive);
+            return (
+              <div
+                key={star}
+                style={{ color: isActive ? "yellow" : "inherit" }}
+                onClick={() => makeStarRating(star)}
+                onMouseEnter={() => makeStarHovering(star)}
+                onMouseLeave={() => handleMouseLeave()}
+              >
+                {isActive ? <IoIosStar /> : <IoIosStarOutline />}
+              </div>
+            );
+          }
           // اگر هاور فعال بود الویت اون باشه در غیر این صورت بر اساس ریتنگ داده شده باشه
-          star <= (hovering || rating) ? (
-            <div
-              key={star}
-              style={{ color: "yellow" }}
-              onClick={() => makeStarRating(star)}
-              onMouseEnter={() => makeStarHovering(star)}
-              onMouseLeave={() => handleMouseLeave}
-            >
-              {/* ستاره تو پر */}
-              <IoIosStar />
-            </div>
-          ) : (
-            <div
-              key={star}
-              onClick={() => makeStarRating(star)}
-              onMouseEnter={() => makeStarHovering(star)}
-              onMouseLeave={() => handleMouseLeave}
-            >
-              {/* ستاره تو خالی */}
-              <IoIosStarOutline />
-            </div>
-          )
+          // star <= (hovering || rating) ? (
+          //   <div
+          //     key={star}
+          //     style={{ color: "yellow" }}
+          //     onClick={() => makeStarRating(star)}
+          //     onMouseEnter={() => makeStarHovering(star)}
+          //     onMouseLeave={() => handleMouseLeave()}
+          //   >
+          //     {/* ستاره تو پر */}
+          //     <IoIosStar />
+          //   </div>
+          // ) : (
+          //   <div
+          //     key={star}
+          //     onClick={() => makeStarRating(star)}
+          //     onMouseEnter={() => makeStarHovering(star)}
+          //     onMouseLeave={() => handleMouseLeave()}
+          //   >
+          //     {/* ستاره تو خالی */}
+          //     <IoIosStarOutline />
+          //   </div>
+          // )
         )}
     </div>
   );
